@@ -357,8 +357,7 @@ const buildWatchShared = () => {
         buildStyleCustomBootstrap,
         buildStyleTheme,
         buildStyleCustomPostType,
-        buildStylePageTemplate,
-        buildStyleShop
+        buildStylePageTemplate
     ))
 }
 
@@ -380,18 +379,7 @@ const themeWatchAll = () => {
         `${pathTheme.input.scss}page-templates/*.scss`
     ], buildStylePageTemplate)
 
-    watch([
-        `${pathTheme.input.scss}shop/abstracts/*.scss`,
-        `${pathTheme.input.scss}shop/components/*.scss`,
-        `${pathTheme.input.scss}shop/*.scss`
-    ], buildStyleShop)
-
     watch([`${pathTheme.input.js}*.js`], buildJSTheme)
-
-    watch([
-        `${pathTheme.input.js}shop/components/*.js`,
-        `${pathTheme.input.js}shop/*.js`
-    ], buildJSShop)
 }
 
 /*
@@ -411,10 +399,8 @@ const buildProject = async () => {
         buildStyleTheme(),
         buildStyleCustomPostType(),
         buildStylePageTemplate(),
-        buildStyleShop(),
         buildJSCustomBootstrap(),
-        buildJSTheme(),
-        buildJSShop(),
+        buildJSTheme()
     ]);
 
     console.log("Dự án đã được xây dựng hoàn tất!");
