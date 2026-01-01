@@ -29,7 +29,7 @@ class Plugin
         ElementorAddon::boot();
 
         // Load custom post types
-        PostTypeManager::load();
+//        PostTypeManager::load();
     }
 
     /**
