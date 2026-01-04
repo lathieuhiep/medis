@@ -15,11 +15,11 @@ $mt-breakpoints: (
 // color
 $mt-colors: (
         "primary": #3498db,
-        "secondary": #2ecc71,
+        "secondary": #168782,
         "accent": #e74c3c,
         "success": #28a745,
         "error": #dc3545,
-        "warning": #ffc107,
+        "warning": #FFE600,
         "info": #17a2b8,
         "black": #000000,
         "white": #ffffff
@@ -54,8 +54,8 @@ $var-fs-3xl: var(--#{$prefix-theme}fs-3xl);
 
 // font family
 $mt-fonts: (
-        base: '"Inter", sans-serif',
-        heading: '"Roboto Condensed", sans-serif'
+        base: '"Arimo", sans-serif',
+        heading: '"Arimo", sans-serif'
 );
 $var-ff-base: var(--#{$prefix-theme}ff-base);
 $var-ff-heading: var(--#{$prefix-theme}ff-heading);

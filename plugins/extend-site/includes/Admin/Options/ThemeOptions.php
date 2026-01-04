@@ -14,6 +14,7 @@ use ExtendSite\Admin\Options\Modules\SinglePostOptions;
 use ExtendSite\Admin\Options\Modules\SocialLinkOptions;
 use ExtendSite\Admin\Options\Modules\WooOptions;
 use ExtendSite\Admin\Options\Modules\WooSingleOptions;
+use ExtendSite\Admin\Options\Modules\ZaloOptions;
 
 defined('ABSPATH') || exit;
 

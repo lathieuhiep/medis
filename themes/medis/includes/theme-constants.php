@@ -7,3 +7,6 @@ const THEME_SIDEBAR_POSITION_HIDDEN = 'hidden';
 // const toggle
 const THEME_YES = 'yes';
 const THEME_NO = 'no';
+
+//
+const ZALO_TYPE_PHONE_QR = 'phone_qr';

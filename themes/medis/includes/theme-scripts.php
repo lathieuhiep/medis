@@ -55,6 +55,10 @@ add_action('wp_enqueue_scripts', 'medis_custom_enqueue_jquery_first', 1);
 // load front-end styles
 function medis_front_end_scripts(): void
 {
+    // load google fonts
+    $font_google_url = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap';
+    wp_enqueue_style('medis-google-fonts', $font_google_url, array(), medis_get_version_theme());
+
     // load custom bootstrap
     wp_enqueue_style('medis-bootstrap', get_theme_file_uri('/assets/vendors/bootstrap/custom-bootstrap.min.css'), array(), medis_get_version_theme());
 

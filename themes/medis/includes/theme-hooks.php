@@ -96,3 +96,15 @@ function medis_add_arrow( $output, $item, $depth, $args ){
 
 	return $output;
 }
+
+// Add resource hints for Google Fonts
+function medis_resource_hints($urls, $relation_type) {
+    if (wp_style_is('medis-google-fonts', 'queue') && $relation_type === 'preconnect') {
+        $urls[] = array(
+            'href' => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        );
+    }
+    return $urls;
+}
+add_filter('wp_resource_hints', 'medis_resource_hints', 10, 2);

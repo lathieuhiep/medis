@@ -3,7 +3,7 @@
     if ( has_nav_menu( 'primary' ) ) :
         wp_nav_menu( array(
             'theme_location' => 'primary',
-            'menu_class' => 'd-lg-flex justify-content-lg-end',
+            'menu_class' => 'd-lg-flex',
             'container' => false,
         ) );
     else:

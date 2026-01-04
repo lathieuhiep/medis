@@ -314,10 +314,16 @@ const buildStylePageTemplate = () => {
 
 /** Task build js theme */
 const buildJSTheme = () => {
+    const entries = glob.sync(`${pathTheme.input.js}*.js`).reduce((result, file) => {
+        const name = path.basename(file, '.js');
+        result[name] = './' + file.replace(/\\/g, '/');
+        return result;
+    }, {});
+
     return buildWebpackPipeline({
         input: `${pathTheme.input.js}*.js`,
         output: `${pathTheme.output.js}`,
-        filename: 'main.min.js'
+        entries: entries
     });
 }
 
