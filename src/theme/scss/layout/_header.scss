@@ -42,6 +42,10 @@
         gap: var(--#{$prefix-theme}spacing-4);
 
         .content {
+          &__label {
+            font-size: var(--#{$prefix-theme}fs-xs);
+          }
+
           &__val {
             margin: 0;
             color: #E6171F;
