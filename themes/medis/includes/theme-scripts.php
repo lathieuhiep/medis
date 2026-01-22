@@ -1,15 +1,4 @@
 <?php
-// Register Back-End script
-function medis_register_back_end_scripts(): void
-{
-    /* Start Get CSS Admin */
-    wp_enqueue_style('admin', get_theme_file_uri('/backend/assets/css/admin.css'));
-
-    wp_enqueue_script('admin', get_theme_file_uri('/backend/assets/js/admin.js'), array('jquery'), medis_get_version_theme(), true);
-}
-
-add_action('admin_enqueue_scripts', 'medis_register_back_end_scripts');
-
 // Remove jquery migrate
 function medis_remove_jquery_migrate($scripts): void
 {
@@ -55,9 +44,10 @@ add_action('wp_enqueue_scripts', 'medis_custom_enqueue_jquery_first', 1);
 // load front-end styles
 function medis_front_end_scripts(): void
 {
-    // load google fonts
-    $font_google_url = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap';
-    wp_enqueue_style('medis-google-fonts', $font_google_url, array(), medis_get_version_theme());
+    // load google font
+    $font_url = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Condensed:wght@400;500;700&display=swap';
+
+    wp_enqueue_style( 'google-font', $font_url, array(), null );
 
     // load custom bootstrap
     wp_enqueue_style('medis-bootstrap', get_theme_file_uri('/assets/vendors/bootstrap/custom-bootstrap.min.css'), array(), medis_get_version_theme());

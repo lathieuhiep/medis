@@ -13,7 +13,6 @@ class ContactOptions extends OptionBase implements OptionIF
     // Key prefix
     private const KEY = 'es_otp_contact_';
     private const HOTLINE = self::KEY . 'hotline';
-    private const ZALO = self::KEY . 'zalo';
     private const EMAIL = self::KEY . 'email';
     private const ADDRESS = self::KEY . 'address';
 
@@ -25,7 +24,6 @@ class ContactOptions extends OptionBase implements OptionIF
         return [
             // Contact
             Field::make('text', self::HOTLINE, esc_html__('Hotline', 'extend-site')),
-            Field::make('text', self::ZALO, esc_html__('ZaLo (Phone/ID OA)', 'extend-site')),
             Field::make('text', self::EMAIL, esc_html__('Email', 'extend-site')),
             Field::make('textarea', self::ADDRESS, esc_html__('Address', 'extend-site')),
         ];
@@ -39,12 +37,6 @@ class ContactOptions extends OptionBase implements OptionIF
     public static function get_hotline(): string
     {
         return (string)self::get(self::HOTLINE);
-    }
-
-    // get zalo
-    public static function get_zalo(): string
-    {
-        return (string)self::get(self::ZALO);
     }
 
     // get email
@@ -64,7 +56,6 @@ class ContactOptions extends OptionBase implements OptionIF
     {
         return [
             'hotline' => self::get_hotline(),
-            'zalo' => self::get_zalo(),
             'email' => self::get_email(),
             'address' => self::get_address(),
         ];

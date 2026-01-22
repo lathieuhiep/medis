@@ -46,29 +46,6 @@
                 primaryMenu.find('.sub-menu-toggle').removeClass('active');
             }
         });
-
-        // click open zalo
-        const handleZaLoClick = () => {
-            // Lắng nghe sự kiện click vào các phần tử có class .chat-zalo
-            $('.chat-zalo-contact').on('click', function (e) {
-                e.preventDefault();
-
-                // Lấy giá trị từ thuộc tính data-zalo (có thể là SĐT hoặc ID OA)
-                const id = $(this).data('zalo');
-
-                if (id) {
-                    // Tạo link mở Zalo
-                    const link = `https://zalo.me/${id}`;
-
-                    // Mở link trong tab mới
-                    window.open(link, '_blank');
-                } else {
-                    console.error("Lỗi: Bạn chưa cấu hình số điện thoại hoặc OA ID!");
-                }
-            });
-        };
-
-        handleZaLoClick();
     });
 
     // loading
