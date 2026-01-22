@@ -77,34 +77,50 @@ add_action('wp_footer', 'medis_custom_footer_code');
 add_filter('xmlrpc_enabled', '__return_false');
 
 // disable gutenberg editor
-add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
-function disable_gutenberg_editor(): bool {
+add_filter("use_block_editor_for_post_type", "medis_disable_gutenberg_editor");
+function medis_disable_gutenberg_editor(): bool {
 	return false;
 }
 
 // disable gutenberg widgets
 add_filter('use_widgets_block_editor', '__return_false');
 
-// Walker for the main menu
-add_filter( 'walker_nav_menu_start_el', 'medis_add_arrow',10,4);
-function medis_add_arrow( $output, $item, $depth, $args ){
-	if('primary' == $args->theme_location && $depth >= 0 ){
-		if (in_array("menu-item-has-children", $item->classes)) {
-			$output .='<span class="sub-menu-toggle ic-mask"></span>';
-		}
-	}
-
-	return $output;
-}
-
-// Add resource hints for Google Fonts
-function medis_resource_hints($urls, $relation_type) {
-    if (wp_style_is('medis-google-fonts', 'queue') && $relation_type === 'preconnect') {
+/**
+ * Thêm thuộc tính preconnect cho Google Fonts
+ */
+function medis_partner_resource_hints( $urls, $relation_type ) {
+    if ( 'preconnect' === $relation_type ) {
+        $urls[] = 'https://fonts.googleapis.com';
         $urls[] = array(
-            'href' => 'https://fonts.gstatic.com',
+            'href'       => 'https://fonts.gstatic.com',
             'crossorigin' => 'anonymous',
         );
     }
     return $urls;
 }
-add_filter('wp_resource_hints', 'medis_resource_hints', 10, 2);
+add_filter( 'wp_resource_hints', 'medis_partner_resource_hints', 10, 2 );
+
+/**
+ * Chuyển đổi thẻ link phông chữ sang chuẩn Preload/Async
+ */
+function medis_partner_async_google_fonts( $tag, $handle, $src ) {
+    // Chỉ áp dụng cho handle 'google-font' đã đăng ký
+    if ( 'google-font' === $handle ) {
+        $tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+        $tag .= '<noscript><link rel="stylesheet" href="' . esc_url( $src ) . '"></noscript>';
+    }
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'medis_partner_async_google_fonts', 10, 3 );
+
+// Walker for the main menu
+add_filter( 'walker_nav_menu_start_el', 'medis_add_arrow',10,4);
+function medis_add_arrow( $output, $item, $depth, $args ){
+	if('primary' == $args->theme_location && $depth >= 0 ){
+		if (in_array("menu-item-has-children", $item->classes)) {
+			$output .='<span class="sub-menu-toggle icon-theme-mask"></span>';
+		}
+	}
+
+	return $output;
+}

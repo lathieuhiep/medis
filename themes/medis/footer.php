@@ -2,15 +2,17 @@
 
     <?php
     if ( !is_404() ) :
-        get_template_part('components/footer/inc', 'layout');
+        get_template_part('template-parts/footer/inc', 'layout');
      endif;
-
-    get_template_part('components/inc', 'loading');
-    get_template_part('components/inc', 'back-top');
      ?>
-</div><!-- close #wrapper -->
+</div><!-- .main-warp -->
 
-<?php wp_footer(); ?>
+<?php
+get_template_part('template-parts/components/inc', 'loading');
+get_template_part('template-parts/components/inc', 'back-top');
+
+wp_footer();
+?>
 
 </body>
 </html>

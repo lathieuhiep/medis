@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?php bloginfo('description'); ?>" />
-
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- open #wrapper -->
-<div id="wrapper">
+<div class="main-warp">
     <?php
     if ( !is_404() ) :
         get_template_part('template-parts/header/inc', 'layout');

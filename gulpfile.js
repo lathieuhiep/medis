@@ -21,7 +21,7 @@ require('dotenv').config()
 const isDev = (process.env.NODE_ENV === 'development');
 
 // server
-// tạo file .env với biến PROXY="localhost/medis". Có thể thay đổi giá trị này.
+// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
 const proxy = process.env.PROXY || "localhost/medis";
 
 const server = () => {
@@ -32,9 +32,6 @@ const server = () => {
         ghostMode: false
     })
 }
-
-// Biến đại diện cho tên plugin và theme
-const pluginNameEFA = 'essential-features-addon';
 
 // function build scss pipeline
 const buildScssPipeline = ({ input, output, includePaths = ['node_modules', 'src'] }) => {
@@ -168,14 +165,6 @@ const pluginEsBuildStyleAddons = () => {
     })
 }
 
-/** Task build style custom post type */
-const pluginEsBuildStyleCPT = () => {
-    return buildScssPipeline({
-        input: `${pathPluginES.input.scss}cpt/**/*.scss`,
-        output: `${pathPluginES.output.css}frontend/cpt/`
-    })
-}
-
 /** Task build js plugin extend site */
 const pluginEsBuildJs = () => {
     return buildJsPipeline({
@@ -186,28 +175,23 @@ const pluginEsBuildJs = () => {
 
 /** Watch all plugin extend site */
 const pluginEsWatchAll = () => {
-    watch([
-        `${pathPluginES.input.scss}abstracts/*.scss`,
-        `${pathPluginES.input.scss}base/*.scss`,
-        `${pathPluginES.input.scss}components/*.scss`,
-    ], gulp.series(
-        pluginEsBuildStyleAddons,
-        pluginEsBuildStyleCPT
-    ))
-
+    // watch custom login scss
     watch([
         `${pathPluginES.input.scss}custom-login.scss`
     ], pluginEsBuildStyleCustomLogin)
 
+    // watch style addons-elementor
     watch([
+        `${pathPluginES.input.scss}abstracts/*.scss`,
+        `${pathPluginES.input.scss}base/*.scss`,
+        `${pathPluginES.input.scss}components/*.scss`,
         `${pathPluginES.input.scss}addons/*.scss`,
         `${pathPluginES.input.scss}addons-elementor.scss`
-    ], pluginEsBuildStyleAddons)
+    ], gulp.series(
+        pluginEsBuildStyleAddons
+    ))
 
-    watch([
-        `${pathPluginES.input.scss}cpt/**/*.scss`
-    ], pluginEsBuildStyleCPT)
-
+    // watch js
     watch([
         `${pathPluginES.input.js}*/**.js`
     ], pluginEsBuildJs)
@@ -217,11 +201,11 @@ const pluginEsWatchAll = () => {
  * Build vendors
  * ---------------------------
  */
-const themeName = 'medis';
+const themeName = 'basictheme';
 
 // function make vendor paths
 const makeVendorPaths = (slug) => {
-    const root = `src/vendors/${slug}`;
+    const root = `./src/vendors/${slug}`;
     const dist = `themes/${themeName}/assets/vendors/${slug}`;
 
     return {
@@ -235,7 +219,7 @@ const pathVendorBootstrap = makeVendorPaths('bootstrap');
 /** task build style custom bootstrap */
 const buildStyleCustomBootstrap = () => {
     return buildScssPipeline({
-        input: `${pathVendorBootstrap.input}*.scss`,
+        input: `${pathVendorBootstrap.input}scss/*.scss`,
         output: `${pathVendorBootstrap.output}`
     })
 }
@@ -243,7 +227,7 @@ const buildStyleCustomBootstrap = () => {
 /** task build js custom bootstrap */
 const buildJSCustomBootstrap = () => {
     return buildWebpackPipeline({
-        input: `${pathVendorBootstrap.input}*.js`,
+        input: `${pathVendorBootstrap.input}js/custom-bootstrap.js`,
         output: `${pathVendorBootstrap.output}`,
         filename: 'custom-bootstrap.min.js'
     });
@@ -251,11 +235,11 @@ const buildJSCustomBootstrap = () => {
 
 const vendorWatchAll = () => {
     watch([
-        `${pathVendorBootstrap.input}*.scss`
+        `${pathVendorBootstrap.input}scss/*.scss`
     ], buildStyleCustomBootstrap)
 
     watch([
-        `${pathVendorBootstrap.input}*.js`
+        `${pathVendorBootstrap.input}js/*.js`
     ], buildJSCustomBootstrap)
 }
 
@@ -310,6 +294,7 @@ const buildStylePageTemplate = () => {
 
 /** Task build js theme */
 const buildJSTheme = () => {
+    // danh sách entry (nhiều file đầu ra)
     const entries = glob.sync(`${pathTheme.input.js}*.js`).reduce((result, file) => {
         const name = path.basename(file, '.js');
         result[name] = './' + file.replace(/\\/g, '/');
@@ -324,14 +309,10 @@ const buildJSTheme = () => {
 }
 
 /** Watch Shared build style */
-const buildWatchShared = () => {
+const buildWatchAbstracts = () => {
     watch([
-        `src/shared/scss/**/*.scss`
+        `${pathTheme.input.scss}abstracts/*.scss`
     ], gulp.parallel(
-        pluginEsBuildStyleCustomLogin,
-        pluginEsBuildStyleAddons,
-        pluginEsBuildStyleCPT,
-
         buildStyleCustomBootstrap,
         buildStyleTheme,
         buildStyleCustomPostType,
@@ -396,7 +377,7 @@ const watchTaskAll = () => {
     vendorWatchAll()
 
     // watch shared styles
-    buildWatchShared()
+    buildWatchAbstracts()
 
     // watch theme
     themeWatchAll()
