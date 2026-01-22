@@ -46,26 +46,64 @@
                 primaryMenu.find('.sub-menu-toggle').removeClass('active');
             }
         });
-    });
 
-    // loading
-    $(window).on("load", function () {
-        $('#site-loading').remove();
-    });
-
-    // scroll event
-    let isScrolling;
-    $(window).on('scroll', function () {
-        if (isScrolling) cancelAnimationFrame(isScrolling);
-
-        isScrolling = requestAnimationFrame(function () {
-            let $scrollTop = $(window).scrollTop();
-
-            if ($scrollTop > 200) {
-                $('#back-top').addClass('active_top');
-            } else {
-                $('#back-top').removeClass('active_top');
-            }
+        // loading
+        $(window).on("load", function () {
+            $('#site-loading').remove();
         });
+
+        // scroll event
+        let isScrolling;
+        $(window).on('scroll', function () {
+            if (isScrolling) cancelAnimationFrame(isScrolling);
+
+            isScrolling = requestAnimationFrame(function () {
+                let $scrollTop = $(window).scrollTop();
+
+                if ($scrollTop > 200) {
+                    $('#back-top').addClass('active_top');
+                } else {
+                    $('#back-top').removeClass('active_top');
+                }
+            });
+        });
+
+        // offcanvas menu-mobile resize
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if ($(window).width() > 991) {
+                    $('.offcanvas-menu-mobile.show').each(function() {
+                        const instance = bootstrap.Offcanvas.getInstance(this);
+                        if (instance) instance.hide();
+                    });
+                }
+            }, 150); // Chỉ chạy sau khi ngừng kéo chuột 150ms
+        });
+
+
+        // handle click show submenu on mobile
+        handleClickShowSubmenuOnMobile()
     });
+
+    // handle click show submenu on mobile
+    const handleClickShowSubmenuOnMobile = () => {
+        const subMenuToggle = $('.sub-menu-toggle')
+
+        if ( subMenuToggle.length ) {
+            subMenuToggle.each(function () {
+                $(this).on( 'click', function () {
+                    const widthScreen = $(window).width()
+
+                    if ( widthScreen < 992 ) {
+                        $(this).toggleClass('active')
+                        $(this).closest( '.menu-item-has-children' ).siblings().find( subMenuToggle ).removeClass( 'active' )
+                        $(this).parent().children( '.sub-menu' ).slideToggle()
+                        $(this).parents( '.menu-item-has-children' ).siblings().find( '.sub-menu' ).slideUp()
+                    }
+                } )
+            })
+        }
+    }
 })(jQuery);
