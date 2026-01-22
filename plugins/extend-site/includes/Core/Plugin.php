@@ -2,8 +2,11 @@
 
 namespace ExtendSite\Core;
 
+use ExtendSite\Admin\AdminManager\AdminManager;
+use ExtendSite\Admin\AdminManager\Modules\BreadcrumbAdmin;
 use ExtendSite\Admin\Options\ThemeOptions;
 use ExtendSite\Constants\Config;
+use ExtendSite\Core\Breadcrumb\BreadcrumbService;
 use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\PostTypeManager;
 
@@ -15,6 +18,9 @@ class Plugin
     {
         // Load plugin text domain
         self::load_text_domain();
+
+        // Load Admin Manager
+        AdminManager::boot();
 
         // Load Carbon Fields
         CarbonLoader::boot();
@@ -29,7 +35,10 @@ class Plugin
         ElementorAddon::boot();
 
         // Load custom post types
-//        PostTypeManager::load();
+        PostTypeManager::load();
+
+        // Load breadcrumb module
+        $this->boot_breadcrumb();
     }
 
     /**
@@ -42,5 +51,24 @@ class Plugin
             false,
             dirname(Config::$basename) . '/languages'
         );
+    }
+
+    /**
+     * Initialize breadcrumb module.
+     */
+    private function boot_breadcrumb(): void
+    {
+        $module = new BreadcrumbAdmin();
+
+        if (!$module->is_enabled()) {
+            return;
+        }
+
+        BreadcrumbService::instance()->boot();
+
+        // Load public functions (function + shortcode)
+        require_once Config::$path . '/includes/Core/Breadcrumb/functions.php';
+
+        // (Chưa render, chỉ đảm bảo module sẵn sàng)
     }
 }

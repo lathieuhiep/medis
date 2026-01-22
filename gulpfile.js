@@ -156,7 +156,7 @@ const pathPluginES = makePluginPaths('extend-site');
 const pluginEsBuildStyleCustomLogin = () => {
     return buildScssPipeline({
         input: `${pathPluginES.input.scss}custom-login.scss`,
-        output: `${pathPluginES.output.css}be/`
+        output: `${pathPluginES.output.css}backend/`
     })
 }
 
@@ -164,7 +164,7 @@ const pluginEsBuildStyleCustomLogin = () => {
 const pluginEsBuildStyleAddons = () => {
     return buildScssPipeline({
         input: `${pathPluginES.input.scss}addons-elementor.scss`,
-        output: `${pathPluginES.output.css}fe/`
+        output: `${pathPluginES.output.css}frontend/`
     })
 }
 
@@ -172,7 +172,7 @@ const pluginEsBuildStyleAddons = () => {
 const pluginEsBuildStyleCPT = () => {
     return buildScssPipeline({
         input: `${pathPluginES.input.scss}cpt/**/*.scss`,
-        output: `${pathPluginES.output.css}fe/cpt/`
+        output: `${pathPluginES.output.css}frontend/cpt/`
     })
 }
 
@@ -277,10 +277,6 @@ const makeThemePaths = () => {
         output: {
             css: `${dist}/css/`,
             js: `${dist}/js/`
-        },
-        woo: {
-            css: `themes/${themeName}/includes/woocommerce/assets/css/`,
-            js: `themes/${themeName}/includes/woocommerce/assets/js/`
         }
     };
 }
@@ -323,30 +319,6 @@ const buildJSTheme = () => {
     return buildWebpackPipeline({
         input: `${pathTheme.input.js}*.js`,
         output: `${pathTheme.output.js}`,
-        entries: entries
-    });
-}
-
-/** Task build style shop */
-const buildStyleShop = () => {
-    return buildScssPipeline({
-        input: `${pathTheme.input.scss}shop/*.scss`,
-        output: `${pathTheme.woo.css}`
-    })
-}
-
-/** Task build js shop */
-const buildJSShop = () => {
-    // Vẫn cần glob để tạo danh sách entry (nhiều file đầu ra)
-    const entries = glob.sync(`${pathTheme.input.js}shop/*.js`).reduce((result, file) => {
-        const name = path.basename(file, '.js');
-        result[name] = './' + file.replace(/\\/g, '/');
-        return result;
-    }, {});
-
-    return buildWebpackPipeline({
-        input: `${pathTheme.input.js}shop/*.js`,
-        output: `${pathTheme.woo.js}`,
         entries: entries
     });
 }
