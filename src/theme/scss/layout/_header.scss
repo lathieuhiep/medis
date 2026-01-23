@@ -287,40 +287,6 @@
       }
     }
   }
-
-  .search-warp {
-    max-width: var(--#{$prefix-theme}w-search, 36.9rem);
-
-    .search-form {
-      position: relative;
-      width: 100%;
-      border-radius: 5rem;
-      overflow: hidden;
-
-      .search-field {
-        padding: 0 5.2rem 0 2.4rem;
-        width: 100%;
-        border: none;
-      }
-
-      .search-submit {
-        padding: 0;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        border: none;
-        width: 5rem;
-        background-color: transparent;
-        @extend %flex-align-center;
-        @include transition();
-
-        &:hover {
-          color: color(secondary);
-        }
-      }
-    }
-  }
 }
 
 .sub-menu-toggle {
@@ -356,7 +322,6 @@
     --bs-offcanvas-padding-y: .8rem;
     --bs-offcanvas-padding-x: 1.6rem;
 
-    margin-bottom: 1.6rem;
     border-bottom: .1rem solid color(white);
 
     .offcanvas-title {
@@ -386,7 +351,7 @@
         ~ li {
           margin-top: 1rem;
           padding-top: 1rem;
-          border-top: 1px solid #111;
+          border-top: 1px solid #222;
         }
       }
     }

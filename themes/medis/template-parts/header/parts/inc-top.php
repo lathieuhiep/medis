@@ -1,15 +1,11 @@
 <?php
 
 use ExtendSite\Admin\Options\Modules\ContactOptions;
-use ExtendSite\Admin\Options\Modules\GeneralOptions;
-use ExtendSite\Admin\Options\Modules\ZaloOptions;
 
 defined('ABSPATH') || exit;
 
-// Get logo
-$logo = medis_opt(GeneralOptions::class)::get_logo_id() ?? '';
-
 // Get contact
+$address = medis_opt(ContactOptions::class)::get_address() ?? '';
 $working_hours = medis_opt(ContactOptions::class)::get_working_hours() ?? '';
 $hotline = medis_opt(ContactOptions::class)::get_hotline() ?? '';
 $zalo = medis_opt(ContactOptions::class)::get_zalo() ?? '';
@@ -18,19 +14,7 @@ $zalo = medis_opt(ContactOptions::class)::get_zalo() ?? '';
 <div class="header-top py-lg-3">
     <div class="container g-0 g-lg-6">
         <div class="header-top__wrapper">
-            <!-- logo -->
-            <div class="logo p-2 p-lg-0 d-flex align-items-center">
-                <a class="d-inline-block" href="<?php echo esc_url( get_home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>">
-                    <?php
-                    if ( ! empty( $logo ) ) :
-                        echo wp_get_attachment_image( $logo, 'medium_large' );
-                    else :
-                        ?>
-                        <img src="<?php echo esc_url( get_theme_file_uri( '/assets/images/logo.png' ) ) ?>"
-                             alt="<?php echo esc_attr( get_bloginfo( 'title' ) ); ?>" />
-                    <?php endif; ?>
-                </a>
-            </div>
+
 
             <!-- info -->
             <div class="info d-none d-lg-flex align-items-center gap-3">

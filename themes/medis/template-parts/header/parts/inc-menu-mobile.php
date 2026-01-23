@@ -9,7 +9,7 @@
         </button>
     </div>
 
-    <div class="offcanvas-body">
+    <div class="offcanvas-body pt-4 px-0 pb-0">
         <?php
         if ( has_nav_menu( 'primary' ) ) :
             wp_nav_menu( array(
