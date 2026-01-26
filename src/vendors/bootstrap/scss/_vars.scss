@@ -22,7 +22,7 @@ $font-family-sans-serif: ff(base);
 $font-family-monospace: ff(base);
 $font-family-base: ff(base);
 
-$font-size-base: map.get($mt-font-sizes, sm);
+$font-size-base: map.get($mt-font-sizes, md);
 $line-height-base: $line-height-base;
 
 // Grid columns

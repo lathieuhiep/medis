@@ -45,7 +45,7 @@ add_action('wp_enqueue_scripts', 'medis_custom_enqueue_jquery_first', 1);
 function medis_front_end_scripts(): void
 {
     // load google font
-    $font_url = 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Roboto+Condensed:wght@400;500;700&display=swap';
+    $font_url = 'https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap';
 
     wp_enqueue_style( 'google-font', $font_url, array(), null );
 

@@ -8,6 +8,7 @@ use ExtendSite\ElementorAddon\Widgets\InfoBox;
 use ExtendSite\ElementorAddon\Widgets\IconTextGrid;
 use ExtendSite\ElementorAddon\Widgets\PostCarousel;
 use ExtendSite\ElementorAddon\Widgets\PostGrid;
+use ExtendSite\ElementorAddon\Widgets\TermGrid;
 use ExtendSite\ElementorAddon\Widgets\TestimonialSlider;
 
 defined('ABSPATH') || exit;
@@ -75,11 +76,13 @@ class ElementorAddon
             $widgets_manager->register(new ContactForm());
         }
 
-        $widgets_manager->register(new HeadingEditor());
-        $widgets_manager->register(new InfoBox());
-        $widgets_manager->register(new IconTextGrid());
-        $widgets_manager->register(new PostCarousel());
-        $widgets_manager->register(new PostGrid());
-        $widgets_manager->register(new TestimonialSlider());
+        $widgets_manager->register(new TermGrid());
+
+//        $widgets_manager->register(new HeadingEditor());
+//        $widgets_manager->register(new InfoBox());
+//        $widgets_manager->register(new IconTextGrid());
+//        $widgets_manager->register(new PostCarousel());
+//        $widgets_manager->register(new PostGrid());
+//        $widgets_manager->register(new TestimonialSlider());
     }
 }

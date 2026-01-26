@@ -5,50 +5,51 @@ $icon-path-theme: "../images/icons";
 
 // breakpoints
 $mt-breakpoints: (
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px,
-        xxl: 1400px
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
 );
 
 // color
 $mt-colors: (
-        "primary": #3498db,
-        "secondary": #2ecc71,
-        "accent": #e74c3c,
-        "success": #28a745,
-        "error": #dc3545,
-        "warning": #ffc107,
-        "info": #17a2b8,
-        "black": #000000,
-        "white": #ffffff
+    "primary": #007B14,
+    "secondary": #2E8F56,
+    "accent": #3A9460,
+    "success": #0E6432,
+    "error": #E6171F,
+    "warning": #FFD600,
+    "info": #5D5D5D,
+    "black": #000000,
+    "white": #ffffff
 );
 
 // typography
 $fs-base: 1.4rem;
 
 $mt-font-sizes: (
-        xs: 1.2rem,
-        sm: $fs-base,
-        md: 1.6rem,
-        lg: 2rem,
-        xl: 2.4rem,
-        xxl: 2.8rem,
-        3xl: 3.2rem
+    xs: 1.2rem,
+    sm: $fs-base,
+    md: 1.6rem,
+    lg: 2rem,
+    xl: 2.4rem,
+    xxl: 2.8rem,
+    3xl: 3.2rem
 );
 
 // font family
 $mt-fonts: (
-        base: '"Inter", sans-serif',
-        heading: '"Roboto Condensed", sans-serif'
+    base: '"Roboto", sans-serif',
+    heading: '"Noto Sans", sans-serif'
 );
 
 // font-weights
 $mt-font-weights: (
-        regular: 400,
-        medium: 500,
-        bold: 700
+    regular: 400,
+    medium: 500,
+    semi-bold: 600,
+    bold: 700
 );
 
 $line-height-base: 1.5;
@@ -63,7 +64,7 @@ $spacers: ();
 }
 
 // body
-$color-required: #ff5555;
+$color-required: map.get($mt-colors, "error");
 
 // headings variables
 $headings-margin-bottom: $spacing-base * 3;

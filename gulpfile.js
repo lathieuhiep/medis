@@ -21,7 +21,7 @@ require('dotenv').config()
 const isDev = (process.env.NODE_ENV === 'development');
 
 // server
-// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
+// tạo file .env với biến PROXY="localhost/medis". Có thể thay đổi giá trị này.
 const proxy = process.env.PROXY || "localhost/medis";
 
 const server = () => {
@@ -201,7 +201,7 @@ const pluginEsWatchAll = () => {
  * Build vendors
  * ---------------------------
  */
-const themeName = 'basictheme';
+const themeName = 'medis';
 
 // function make vendor paths
 const makeVendorPaths = (slug) => {
@@ -328,6 +328,7 @@ const themeWatchAll = () => {
         `${pathTheme.input.scss}components/*.scss`,
         `${pathTheme.input.scss}layout/*.scss`,
         `${pathTheme.input.scss}main.scss`,
+        `${pathTheme.input.scss}elementor-addons/*.scss`
     ], buildStyleTheme)
 
     watch([

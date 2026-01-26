@@ -49,6 +49,10 @@
   }
 }
 
+.min-h-inherit {
+  min-height: inherit;
+}
+
 .site-container {
   --#{$prefix-theme}pd-site-container: 5rem 0;
 
