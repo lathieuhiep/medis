@@ -33,19 +33,23 @@
 
     .info {
       &__item {
+        .icon {
+          .icon-theme-mask {
+            --#{$prefix-theme}icon-theme-color: #{color(primary)};
+
+            @media (min-width: 1200px) {
+              --#{$prefix-theme}icon-theme-width: 4rem;
+              --#{$prefix-theme}icon-theme-height: 4rem;
+            }
+
+            @media (min-width: 992px) and (max-width: 1199px) {
+              --#{$prefix-theme}icon-theme-width: 3.2rem;
+              --#{$prefix-theme}icon-theme-height: 3.2rem;
+            }
+          }
+        }
+
         @media (min-width: 992px) and (max-width: 1199px) {
-          &.hours {
-            .icon {
-              width: 4rem;
-            }
-          }
-
-          &.phone {
-            .icon {
-              width: 3.2rem;
-            }
-          }
-
           &.zalo {
             .icon {
               width: 8rem;
@@ -112,6 +116,7 @@
         > a {
           text-transform: uppercase;
           color: color(white);
+          font-size: fs(sm);
           font-weight: fw(semi-bold);
         }
       }
@@ -283,6 +288,40 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+
+  .search-warp {
+    max-width: var(--#{$prefix-theme}w-search, 36.9rem);
+
+    .search-form {
+      position: relative;
+      width: 100%;
+      border-radius: 5rem;
+      overflow: hidden;
+
+      .search-field {
+        padding: 0 5.2rem 0 2.4rem;
+        width: 100%;
+        border: none;
+      }
+
+      .search-submit {
+        padding: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border: none;
+        width: 5rem;
+        background-color: transparent;
+        @extend %flex-align-center;
+        @include transition();
+
+        &:hover {
+          color: color(secondary);
         }
       }
     }

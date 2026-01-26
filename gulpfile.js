@@ -328,6 +328,7 @@ const themeWatchAll = () => {
         `${pathTheme.input.scss}components/*.scss`,
         `${pathTheme.input.scss}layout/*.scss`,
         `${pathTheme.input.scss}main.scss`,
+        `${pathTheme.input.scss}elementor-addons/*.scss`
     ], buildStyleTheme)
 
     watch([

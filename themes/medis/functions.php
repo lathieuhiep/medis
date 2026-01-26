@@ -19,11 +19,10 @@ require get_parent_theme_file_path( '/includes/theme-functions.php' );
 require get_parent_theme_file_path( '/includes/theme-scripts.php' );
 require get_parent_theme_file_path( '/includes/theme-sidebar.php' );
 
-// Required: Theme options
-require get_theme_file_path( '/includes/theme-helper-options.php' );
-
-// Required: Meta box options
-require get_parent_theme_file_path( '/includes/theme-meta-box-options.php' );
+// Required: Helper options
+require_once get_theme_file_path('includes/helpers/opt-header.php');
+require_once get_theme_file_path('includes/helpers/opt-contact.php');
+require_once get_theme_file_path('includes/helpers/opt-footer.php');
 
 // Required: Widgets
 require get_parent_theme_file_path( '/includes/widgets/contact-info-widget.php' );
