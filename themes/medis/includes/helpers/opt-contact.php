@@ -35,3 +35,19 @@ function medis_opt_contact_zalo(): string
 {
     return medis_opt(ContactOptions::class)::get_zalo() ?? '';
 }
+
+/**
+ * Get Messenger link
+ */
+function medis_opt_contact_messenger(): string
+{
+    return medis_opt(ContactOptions::class)::get_messenger() ?? '';
+}
+
+/**
+ * Get Booking page ID
+ */
+function medis_opt_contact_booking(): int
+{
+    return medis_opt(ContactOptions::class)::get_booking() ?? 0;
+}

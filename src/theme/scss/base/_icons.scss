@@ -10,11 +10,13 @@ $icon-theme-names: (
         chevron-right
         chevron-up
         clock-regular
+        comment-dots
         facebook-f
         instagram
         linkedin-in
         location-dot
         magnifying-glass
+        messenger
         minus
         paper-plane
         phone
@@ -26,13 +28,12 @@ $icon-theme-names: (
 );
 
 .icon-theme-mask {
-  --#{$prefix-theme}icon-theme-width: 1.6rem;
-  --#{$prefix-theme}icon-theme-height: 1.6rem;
+  --#{$prefix-theme}icon-theme-size: 1.6rem;
   --#{$prefix-theme}icon-theme-color: currentColor;
 
   display: inline-block;
-  width: var(--#{$prefix-theme}icon-theme-width);
-  height: var(--#{$prefix-theme}icon-theme-height);
+  width: var(--#{$prefix-theme}icon-theme-size);
+  height: var(--#{$prefix-theme}icon-theme-size);
   background-color: var(--#{$prefix-theme}icon-theme-color);
   mask-size: contain;
   -webkit-mask-size: contain;

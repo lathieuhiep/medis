@@ -38,13 +38,11 @@
             --#{$prefix-theme}icon-theme-color: #{color(primary)};
 
             @media (min-width: 1200px) {
-              --#{$prefix-theme}icon-theme-width: 4rem;
-              --#{$prefix-theme}icon-theme-height: 4rem;
+              --#{$prefix-theme}icon-theme-size: 4rem;
             }
 
             @media (min-width: 992px) and (max-width: 1199px) {
-              --#{$prefix-theme}icon-theme-width: 3.2rem;
-              --#{$prefix-theme}icon-theme-height: 3.2rem;
+              --#{$prefix-theme}icon-theme-size: 3.2rem;
             }
           }
         }
@@ -64,8 +62,7 @@
       background-color: color(secondary);
 
       .icon-theme-mask {
-        --#{$prefix-theme}icon-theme-width: 2.4rem;
-        --#{$prefix-theme}icon-theme-height: 2.4rem;
+        --#{$prefix-theme}icon-theme-size: 2.4rem;
       }
     }
   }
@@ -375,8 +372,7 @@
       opacity: 1;
 
       .icon-theme-mask {
-        --#{$prefix-theme}icon-theme-width: 2rem;
-        --#{$prefix-theme}icon-theme-height: 2rem;
+        --#{$prefix-theme}icon-theme-size: 2rem;
       }
     }
   }

@@ -1,0 +1,55 @@
+@import "../abstracts/abstracts";
+
+.contact-us-warp {
+  color: color(white);
+  background-color: #00644A;
+
+  @media (min-width: 1200px) {
+    font-size: fs(lg);
+  }
+
+  @media (min-width: 576px) and (max-width: 1199px) {
+    font-size: fs(md);
+  }
+
+  @media (max-width: 575px) {
+    font-size: fs(sm);
+  }
+
+  .col {
+    ~ .col {
+      @media (min-width: 992px) {
+        border-left: .1rem solid color(white);
+      }
+      
+      @media (max-width: 991px) {
+        &:nth-child(2n+2) {
+          border-left: .1rem solid color(white);
+        }
+      }
+    }
+  }
+
+  .item {
+    min-height: 7rem;
+  }
+
+  a {
+    color: currentColor;
+    font-size: inherit;
+
+    &:hover {
+      color: color(warning);
+    }
+  }
+
+  .icon-theme-mask {
+    @media (min-width: 576px) {
+      --#{$prefix-theme}icon-theme-size: 2.8rem;
+    }
+
+    @media (max-width: 575px) {
+      --#{$prefix-theme}icon-theme-size: 2.4rem;
+    }
+  }
+}

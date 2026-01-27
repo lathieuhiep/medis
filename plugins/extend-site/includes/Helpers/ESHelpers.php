@@ -89,4 +89,21 @@ class ESHelpers
             'screen_reader_text' => '&nbsp;',
         ));
     }
+
+    /**
+     * Lấy danh sách tất cả các trang (pages) trong WordPress.
+     *
+     * @return array ID => Tiêu đề của các trang.
+     */
+    public static function get_all_page(): array
+    {
+        $pages = get_pages();
+        $options = ['' => esc_html__('— Chọn trang —', 'extend-site')];
+
+        foreach ( $pages as $page ) {
+            $options[ $page->ID ] = $page->post_title;
+        }
+
+        return $options;
+    }
 }

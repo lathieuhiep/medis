@@ -5,6 +5,7 @@ namespace ExtendSite\Admin\Options\Modules;
 use Carbon_Fields\Field;
 use ExtendSite\Admin\Options\OptionBase;
 use ExtendSite\Admin\Options\OptionIF;
+use ExtendSite\Helpers\ESHelpers;
 
 defined('ABSPATH') || exit;
 
@@ -15,6 +16,8 @@ class ContactOptions extends OptionBase implements OptionIF
     private const WORKING_HOURS = self::KEY . 'working_hours';
     private const HOTLINE = self::KEY . 'hotline';
     private const ZALO = self::KEY . 'zalo';
+    private const MESSENGER = self::KEY . 'messenger';
+    private const BOOKING = self::KEY . 'booking';
     private const EMAIL = self::KEY . 'email';
     private const ADDRESS = self::KEY . 'address';
 
@@ -33,6 +36,12 @@ class ContactOptions extends OptionBase implements OptionIF
 
             Field::make('text', self::ZALO, esc_html__('ZaLo (Phone/ID OA)', 'extend-site'))
                 ->set_default_value('0938575118'),
+
+            Field::make('text', self::MESSENGER, esc_html__('Messenger (Link)', 'extend-site'))
+                ->set_default_value(''),
+
+            Field::make( 'select', self::BOOKING, esc_html__( 'Booking (page)', 'extend-site' ) )
+                ->add_options( ESHelpers::get_all_page() ),
 
             Field::make('text', self::EMAIL, esc_html__('Email', 'extend-site')),
 
@@ -63,6 +72,18 @@ class ContactOptions extends OptionBase implements OptionIF
         return (string)self::get(self::ZALO);
     }
 
+    // get messenger
+    public static function get_messenger(): string
+    {
+        return (string)self::get(self::MESSENGER);
+    }
+
+    // get booking page ID
+    public static function get_booking(): int
+    {
+        return (int)self::get(self::BOOKING);
+    }
+
     // get email
     public static function get_email(): string
     {
@@ -79,10 +100,13 @@ class ContactOptions extends OptionBase implements OptionIF
     public static function get_all(): array
     {
         return [
+            'working_hours' => self::get_working_hours(),
             'hotline' => self::get_hotline(),
             'zalo' => self::get_zalo(),
+            'messenger' => self::get_messenger(),
             'email' => self::get_email(),
             'address' => self::get_address(),
+            'booking' => self::get_booking(),
         ];
     }
 }
