@@ -1,4 +1,5 @@
 <?php
+
 namespace ExtendSite\ElementorAddon\Widgets;
 
 use Elementor\Group_Control_Typography;
@@ -9,81 +10,87 @@ use Elementor\Controls_Manager;
 use ExtendSite\ElementorAddon\Base\ControlOptions;
 use ExtendSite\ElementorAddon\Traits\HasImageSizeControl;
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-class InfoBox extends Widget_Base {
+class InfoBox extends Widget_Base
+{
     use HasImageSizeControl;
 
-	// widget name
-	public function get_name(): string {
-		return 'es-info-box';
-	}
+    // widget name
+    public function get_name(): string
+    {
+        return 'es-info-box';
+    }
 
-	// widget title
-	public function get_title(): string {
-		return esc_html__( 'Hộp thông tin', 'extend-site' );
-	}
+    // widget title
+    public function get_title(): string
+    {
+        return esc_html__('Hộp thông tin', 'extend-site');
+    }
 
-	// widget icon
-	public function get_icon(): string {
-		return 'eicon-icon-box';
-	}
+    // widget icon
+    public function get_icon(): string
+    {
+        return 'eicon-icon-box';
+    }
 
-	// widget categories
-	public function get_categories(): array {
-		return array( 'es-addons' );
-	}
+    // widget categories
+    public function get_categories(): array
+    {
+        return array('es-addons');
+    }
 
-	// widget keywords
-	public function get_keywords(): array
-	{
-		return ['info', 'box', 'info box', 'extend site'];
-	}
+    // widget keywords
+    public function get_keywords(): array
+    {
+        return ['info', 'box', 'info box', 'extend site'];
+    }
 
-	// widget controls
-	protected function register_controls(): void {
-		// image section
-		$this->start_controls_section(
-			'image_section',
-			[
-				'label' => esc_html__( 'Ảnh', 'extend-site' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			]
-		);
+    // widget controls
+    protected function register_controls(): void
+    {
+        // image section
+        $this->start_controls_section(
+            'image_section',
+            [
+                'label' => esc_html__('Ảnh', 'extend-site'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
 
         $this->add_control('type',
             [
-            'label'   => esc_html__('Kiểu', 'extend-site'),
-            'type'    => Controls_Manager::SELECT,
-            'default' => 'img-on-top',
-            'options' => [
-                'img-on-top'  => esc_html__('Ảnh/Icon ở trên', 'extend-site'),
-                'img-on-left' => esc_html__('Ảnh/Icon bên trái', 'extend-site'),
-                'img-on-right' => esc_html__('Ảnh/Icon bên phải', 'extend-site'),
-            ]
-        ]);
+                'label' => esc_html__('Kiểu', 'extend-site'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'img-on-top',
+                'options' => [
+                    'img-on-top' => esc_html__('Ảnh/Icon ở trên', 'extend-site'),
+                    'img-on-left' => esc_html__('Ảnh/Icon bên trái', 'extend-site'),
+                    'img-on-right' => esc_html__('Ảnh/Icon bên phải', 'extend-site'),
+                ]
+            ]);
 
         $this->add_control('img_or_icon',
             [
-                'label'   => esc_html__('Ảnh hoặc Icon', 'extend-site'),
-                'type'    => Controls_Manager::CHOOSE,
+                'label' => esc_html__('Ảnh hoặc Icon', 'extend-site'),
+                'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'options' => [
-                    'none'  => [ 'title' => esc_html__('Không dùng', 'extend-site'),  'icon' => 'fa fa-ban' ],
-                    'number' => [ 'title' => esc_html__('Số', 'extend-site'),  'icon' => 'eicon-number-field' ],
-                    'icon'  => [ 'title' => esc_html__('Icon', 'extend-site'),  'icon' => 'fa fa-info-circle' ],
-                    'image' => [ 'title' => esc_html__('Image', 'extend-site'), 'icon' => 'fa fa-image' ],
+                    'none' => ['title' => esc_html__('Không dùng', 'extend-site'), 'icon' => 'fa fa-ban'],
+                    'number' => ['title' => esc_html__('Số', 'extend-site'), 'icon' => 'eicon-number-field'],
+                    'icon' => ['title' => esc_html__('Icon', 'extend-site'), 'icon' => 'fa fa-info-circle'],
+                    'image' => ['title' => esc_html__('Image', 'extend-site'), 'icon' => 'fa fa-image'],
                 ],
                 'default' => 'icon',
-        ]);
+            ]);
 
         // Condition: 'img_or_icon' => 'number'
         $this->add_control(
             'number',
             [
-                'name'    => 'number',
-                'label'   => esc_html__( 'Số', 'extend-site' ),
-                'type'    => Controls_Manager::NUMBER,
+                'name' => 'number',
+                'label' => esc_html__('Số', 'extend-site'),
+                'type' => Controls_Manager::NUMBER,
                 'default' => 1,
                 'condition' => [
                     'img_or_icon' => 'number',
@@ -95,11 +102,11 @@ class InfoBox extends Widget_Base {
         $this->add_control(
             'icon',
             [
-                'name'    => 'icon',
-                'label'   => esc_html__( 'Icon', 'extend-site' ),
-                'type'    => Controls_Manager::ICONS,
+                'name' => 'icon',
+                'label' => esc_html__('Icon', 'extend-site'),
+                'type' => Controls_Manager::ICONS,
                 'default' => [
-                    'value'   => 'fas fa-star',
+                    'value' => 'fas fa-star',
                     'library' => 'fa-solid',
                 ],
                 'condition' => [
@@ -129,23 +136,23 @@ class InfoBox extends Widget_Base {
             ],
         ]);
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
         // content section
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Nội dung', 'extend-site' ),
-                'tab'   => Controls_Manager::TAB_CONTENT,
+                'label' => esc_html__('Nội dung', 'extend-site'),
+                'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
 
         $this->add_control(
             'heading',
             [
-                'label'       => esc_html__( 'Tiêu đề', 'extend-site' ),
-                'type'        => Controls_Manager::TEXT,
-                'default'     => esc_html__( 'Tiêu đề', 'extend-site' ),
+                'label' => esc_html__('Tiêu đề', 'extend-site'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Tiêu đề', 'extend-site'),
                 'label_block' => true
             ]
         );
@@ -153,8 +160,8 @@ class InfoBox extends Widget_Base {
         $this->add_control(
             'heading_tag',
             [
-                'label'   => esc_html__( 'Thẻ HTML tiêu đề', 'extend-site' ),
-                'type'    => Controls_Manager::SELECT,
+                'label' => esc_html__('Thẻ HTML tiêu đề', 'extend-site'),
+                'type' => Controls_Manager::SELECT,
                 'default' => 'h3',
                 'options' => ControlOptions::text_wrappers(),
             ]
@@ -164,9 +171,9 @@ class InfoBox extends Widget_Base {
             'content',
             [
                 'name' => 'content',
-                'label' => esc_html__( 'Văn bản', 'extend-site' ),
+                'label' => esc_html__('Văn bản', 'extend-site'),
                 'type' => Controls_Manager::WYSIWYG,
-                'default' => esc_html__( 'List Content' , 'extend-site' ),
+                'default' => esc_html__('List Content', 'extend-site'),
                 'show_label' => false,
             ],
         );
@@ -174,189 +181,263 @@ class InfoBox extends Widget_Base {
         $this->end_controls_section();
 
         // style box
-		$this->start_controls_section(
-			'style_box',
-			[
-				'label' => esc_html__( 'Hộp', 'extend-site' ),
-				'tab'   => Controls_Manager::TAB_STYLE
-			]
-		);
+        $this->start_controls_section(
+            'style_box',
+            [
+                'label' => esc_html__('Hộp', 'extend-site'),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
 
-		$this->add_responsive_control(
-			'icon_space',
-			[
-				'label' => esc_html__( 'Khoảng cách các Icon', 'extend-site' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-					'em' => [
-						'max' => 10,
-					],
-					'rem' => [
-						'max' => 10,
-					],
-				],
-				'default' => [
-					'unit' => 'rem',
-					'size' => 2.4,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .es-addon-ic-txt' => 'gap: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'icon_space',
+            [
+                'label' => esc_html__('Khoảng cách các Icon', 'extend-site'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'custom'],
+                'range' => [
+                    'px' => [
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'max' => 10,
+                    ],
+                    'rem' => [
+                        'max' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'rem',
+                    'size' => 2.4,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .es-addon-info-box' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_responsive_control(
-			'content_spacer',
-			[
-				'label' => esc_html__( 'Khoảng cách nội dung', 'extend-site' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
-				'range' => [
-					'px' => [
-						'max' => 100,
-					],
-					'em' => [
-						'max' => 10,
-					],
-					'rem' => [
-						'max' => 10,
-					],
-				],
-				'default' => [
-					'unit' => 'rem',
-					'size' => 1.2,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .text-box' => 'gap: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'content_spacer',
+            [
+                'label' => esc_html__('Khoảng cách nội dung', 'extend-site'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'custom'],
+                'range' => [
+                    'px' => [
+                        'max' => 100,
+                    ],
+                    'em' => [
+                        'max' => 10,
+                    ],
+                    'rem' => [
+                        'max' => 10,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'rem',
+                    'size' => 1.2,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .text-box' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
         // style icon
-		$this->start_controls_section(
-			'style_icon',
-			[
-				'label' => esc_html__( 'Icon', 'extend-site' ),
-				'tab'   => Controls_Manager::TAB_STYLE
-			]
-		);
+        $this->start_controls_section(
+            'style_icon',
+            [
+                'label' => esc_html__('Icon', 'extend-site'),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
 
-		$this->add_responsive_control(
-			'icon_width',
-			[
-				'label' => esc_html__( 'Độ rộng', 'extend-site' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 1000,
-						'step' => 5,
-					],
-					'%' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'default' => [
-					'unit' => 'rem',
-					'size' => '',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .es-icon' => '--es-icon-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'icon_width',
+            [
+                'label' => esc_html__('Độ rộng', 'extend-site'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 5,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .thumbnail-box__type' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'icon_color',
-			[
-				'label'     => esc_html__( 'Màu', 'extend-site' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .es-icon' => 'color: {{VALUE}}',
-				],
-			]
-		);
+        $this->add_control(
+            'icon_color',
+            [
+                'label' => esc_html__('Màu', 'extend-site'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .es-icon' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
-		// Style heading
-		$this->start_controls_section(
-			'style_heading',
-			[
-				'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
-				'tab'   => Controls_Manager::TAB_STYLE
-			]
-		);
+        // Style heading
+        $this->start_controls_section(
+            'style_heading',
+            [
+                'label' => esc_html__('Tiêu đề', 'extend-site'),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
 
-		$this->add_control(
-			'heading_color',
-			[
-				'label'     => esc_html__( 'Màu', 'extend-site' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .text-box .heading' => 'color: {{VALUE}}',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'heading_align',
+            [
+                'label' => esc_html__('Căn chỉnh', 'extend-site'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Trái', 'extend-site'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'heading_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
-				'selector' => '{{WRAPPER}} .text-box .heading',
-			]
-		);
+                    'center' => [
+                        'title' => esc_html__('Giữa', 'extend-site'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
 
-		$this->end_controls_section();
+                    'right' => [
+                        'title' => esc_html__('Phải', 'extend-site'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
 
-		// Style desc
-		$this->start_controls_section(
-			'style_description',
-			[
-				'label' => esc_html__( 'Văn bản', 'extend-site' ),
-				'tab'   => Controls_Manager::TAB_STYLE
-			]
-		);
+                    'justify' => [
+                        'title' => esc_html__('Căn đều hai lề', 'extend-site'),
+                        'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .text-box .heading' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'desc_color',
-			[
-				'label'     => esc_html__( 'Color', 'extend-site' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .text-box .content' => 'color: {{VALUE}}',
-				],
-			]
-		);
+        $this->add_control(
+            'heading_color',
+            [
+                'label' => esc_html__('Màu', 'extend-site'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .text-box .heading' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'desc_typography',
-				'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
-				'selector' => '{{WRAPPER}} .text-box .content',
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'heading_typography',
+                'label' => esc_html__('Kiểu chữ', 'extend-site'),
+                'selector' => '{{WRAPPER}} .text-box .heading',
+            ]
+        );
 
-		$this->end_controls_section();
-	}
+        $this->end_controls_section();
 
-	// widget output on the frontend
-	protected function render(): void {
-		$settings = $this->get_settings_for_display();
+        // Style desc
+        $this->start_controls_section(
+            'style_description',
+            [
+                'label' => esc_html__('Văn bản', 'extend-site'),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'desc_align',
+            [
+                'label' => esc_html__('Căn chỉnh', 'extend-site'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__('Trái', 'extend-site'),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+
+                    'center' => [
+                        'title' => esc_html__('Giữa', 'extend-site'),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+
+                    'right' => [
+                        'title' => esc_html__('Phải', 'extend-site'),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+
+                    'justify' => [
+                        'title' => esc_html__('Căn đều hai lề', 'extend-site'),
+                        'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .text-box .content' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'desc_color',
+            [
+                'label' => esc_html__('Color', 'extend-site'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .text-box .content' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'desc_typography',
+                'label' => esc_html__('Kiểu chữ', 'extend-site'),
+                'selector' => '{{WRAPPER}} .text-box .content',
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    // widget output on the frontend
+    protected function render(): void
+    {
+        $settings = $this->get_settings_for_display();
         $type = $settings['type'];
 
+        // wrapper classes
+        $classes = ['es-addon-info-box es-flex'];
+
+        if ($type == 'img-on-top') {
+            $classes[] = 'es-flex-column';
+        }
+
+        $this->add_render_attribute('classes', 'class', $classes);
+
         // controls
-		$heading_tag = $settings['heading_tag'];
+        $heading_tag = $settings['heading_tag'];
 
         // Add class img_or_icon
         $img_or_icon = $settings['img_or_icon'];
@@ -364,23 +445,23 @@ class InfoBox extends Widget_Base {
         $class_img_or_icon = ['thumbnail-box__type'];
         $class_img_or_icon[] = 'type-' . $img_or_icon;
 
-        $this->add_render_attribute( 'class_img_or_icon', 'class', $class_img_or_icon );
-	?>
-		<div class="es-addon-info-box es-flex">
-            <?php if ( $img_or_icon != 'none' ): ?>
+        $this->add_render_attribute('class_img_or_icon', 'class', $class_img_or_icon);
+        ?>
+        <div <?php echo $this->get_render_attribute_string('classes'); ?>>
+            <?php if ($img_or_icon != 'none'): ?>
                 <div class="thumbnail-box">
-                    <div <?php echo $this->get_render_attribute_string( 'class_img_or_icon' ); ?>>
+                    <div <?php echo $this->get_render_attribute_string('class_img_or_icon'); ?>>
                         <?php
-                        if ( $img_or_icon == 'number' ):
-                            echo esc_html( $settings['number'] );
+                        if ($img_or_icon == 'number'):
+                            echo esc_html($settings['number']);
                         endif;
 
-                        if ( $img_or_icon == 'icon' ) :
-                            Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] );
+                        if ($img_or_icon == 'icon') :
+                            Icons_Manager::render_icon($settings['icon'], ['aria-hidden' => 'true']);
                         endif;
 
-                        if ( $img_or_icon == 'image' ):
-                            echo wp_get_attachment_image( $settings['image']['id'], $settings['image_size'] );
+                        if ($img_or_icon == 'image'):
+                            echo wp_get_attachment_image($settings['image']['id'], $settings['image_size']);
                         endif;
                         ?>
                     </div>
@@ -391,18 +472,77 @@ class InfoBox extends Widget_Base {
                 <?php
                 printf(
                     '<%1$s class="heading es-m-0">%2$s</%1$s>',
-                    esc_attr( $heading_tag ),
-                    esc_html( $settings['heading'] )
+                    esc_attr($heading_tag),
+                    esc_attr($settings['heading'])
                 );
                 ?>
 
                 <div class="content">
-                    <?php echo wpautop( $settings['content'] ); ?>
+                    <?php echo wpautop($settings['content']); ?>
                 </div>
             </div>
-		</div>
-	<?php
-	}
+        </div>
+        <?php
+    }
 
-	protected function content_template() {}
+    // Widget output in the editor
+    protected function content_template()
+    {
+        ?>
+        <#
+        var type = settings.type;
+        var img_or_icon = settings.img_or_icon;
+
+        // Classes cho wrapper
+        var wrapperClasses = 'es-addon-info-box es-flex';
+        if (type === 'img-on-top') {
+        wrapperClasses += ' es-flex-column';
+        }
+
+        // Classes cho thumbnail box
+        var thumbnailClasses = 'thumbnail-box__type type-' + img_or_icon;
+        #>
+
+        <div class="{{ wrapperClasses }}">
+            <# if ( img_or_icon !== 'none' ) { #>
+            <div class="thumbnail-box">
+                <div class="{{ thumbnailClasses }}">
+                    <# if ( img_or_icon === 'number' ) { #>
+                        {{{ settings.number }}}
+                    <# } #>
+
+                    <# if ( img_or_icon === 'icon' && settings.icon && settings.icon.value ) {
+                        // Cách render icon an toàn hơn để tránh lỗi parentElement
+                        var iconHTML = elementor.helpers.renderIcon( view, settings.icon, { 'aria-hidden': true }, 'i' , 'object' );
+                        if ( iconHTML && iconHTML.value ) {
+                            #> {{{ iconHTML.value }}} <#
+                        }
+                    } #>
+
+                    <# if ( img_or_icon === 'image' && settings.image.url ) {
+                        var imageUrl = settings.image.url;
+                        // Nếu có size cụ thể, thử lấy URL từ size đó
+                        if ( settings.image_size !== 'full' && settings.image.sizes && settings.image.sizes[settings.image_size] ) {
+                        imageUrl = settings.image.sizes[settings.image_size].url;
+                        }
+                    #>
+                    <img src="{{ imageUrl }}" />
+                    <# } #>
+                </div>
+            </div>
+            <# } #>
+
+            <div class="text-box es-flex es-flex-column es-flex-grow-1">
+                <# var headingTag = elementor.helpers.validateHTMLTag( settings.heading_tag ); #>
+                    <{{{ headingTag }}} class="heading es-m-0">
+                    {{{ settings.heading }}}
+                </{{{ headingTag }}}>
+
+            <div class="content">
+                {{{ settings.content }}}
+            </div>
+        </div>
+        </div>
+        <?php
+    }
 }

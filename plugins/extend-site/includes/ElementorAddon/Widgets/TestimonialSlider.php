@@ -234,7 +234,7 @@ class TestimonialSlider extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 
         // Add classes for the slider wrapper
-        $classes = ['es-addon-carousel-images swiper es-custom-swiper-slider'];
+        $classes = ['es-addon-testimonial-slider es-slider-wrap es-slider-wrap--carousel'];
 
         if ( $settings['equal_height'] === 'yes' ) {
             $classes[] = 'es-equal-height';
@@ -245,54 +245,60 @@ class TestimonialSlider extends Widget_Base {
 		// set settings for swiper
 		$swiperOptions = $this->generateSlideConfig( $settings );
     ?>
-        <div <?php echo $this->get_render_attribute_string( 'classes' ); ?> data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
-            <div class="swiper-wrapper">
-                <?php
-                foreach ( $settings['list'] as $item ) :
-                    $imageId = $item['list_image']['id'];
-                ?>
-                    <div class="item swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-                        <div class="item__image">
-                            <?php
-                            if ( $imageId ) :
-                                echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
-                            else:
-                                ?>
-                                <img src="<?php echo esc_url( Config::$url . 'assets/images/user-avatar.png' ); ?>"
-                                     alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
-                            <?php endif; ?>
+        <div <?php echo $this->get_render_attribute_string( 'classes' ); ?>>
+            <div class="swiper es-custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
+                <div class="swiper-wrapper">
+                    <?php
+                    foreach ( $settings['list'] as $item ) :
+                        $imageId = $item['list_image']['id'];
+                    ?>
+                        <div class="swiper-slide">
+                            <div class="item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                                <div class="item__image">
+                                    <?php
+                                    if ( $imageId ) :
+                                        echo wp_get_attachment_image( $item['list_image']['id'], $settings['image_size'] );
+                                    else:
+                                        ?>
+                                        <img src="<?php echo esc_url( Config::$url . 'assets/images/default-avatar.png' ); ?>"
+                                             alt="<?php echo esc_attr( $item['list_title'] ); ?>"/>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="item__content">
+                                    <div class="group">
+                                        <h4 class="name">
+                                            <?php echo esc_html( $item['list_title'] ); ?>
+                                        </h4>
+
+                                        <div class="position">
+                                            <?php echo esc_html( $item['list_position'] ); ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="desc">
+                                        <?php echo wp_kses_post( $item['list_description'] ) ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    <?php endforeach; ?>
+                </div>
 
-                        <div class="item__content">
-                            <div class="desc">
-                                <?php echo wp_kses_post( $item['list_description'] ) ?>
-                            </div>
-
-                            <div class="name">
-                                <?php echo esc_html( $item['list_title'] ); ?>
-                            </div>
-
-                            <div class="position">
-                                <?php echo esc_html( $item['list_position'] ); ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
+                    <div class="swiper-pagination"></div>
+                <?php endif; ?>
             </div>
 
-	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
-                <div class="swiper-pagination"></div>
-	        <?php endif; ?>
-
-	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
-                <div class="swiper-button-prev">
+            <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
+                <div class="swiper-button-arrow swiper-button-prev">
                     <i class="es-icon-mask es-icon-mask-angle-left"></i>
                 </div>
 
-                <div class="swiper-button-next">
+                <div class="swiper-button-arrow swiper-button-next">
                     <i class="es-icon-mask es-icon-mask-angle-right"></i>
                 </div>
-	        <?php endif; ?>
+            <?php endif; ?>
         </div>
     <?php
 	}

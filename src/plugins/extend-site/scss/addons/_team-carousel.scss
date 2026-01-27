@@ -1,0 +1,37 @@
+@use "sass:map";
+
+@import "../abstracts/abstracts";
+
+.#{$prefix-plugin-class-addon}team-carousel {
+  --item-padding: 2.4rem;
+  --item-radius: 1.6rem;
+  --fs-name: 1.6rem;
+  --fw-name: 700;
+
+  .item {
+    padding: var(--item-padding);
+    border-radius: var(--item-radius);
+    box-shadow: 0 .4rem .4rem 0 #00000040;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+
+      .group {
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+        text-align: center;
+      }
+    }
+
+    .name {
+      margin-bottom: 0;
+    }
+  }
+}

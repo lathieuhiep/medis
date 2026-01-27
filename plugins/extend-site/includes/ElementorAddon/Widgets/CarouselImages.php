@@ -1,11 +1,13 @@
 <?php
 namespace ExtendSite\ElementorAddon\Widgets;
 
+use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Utils;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use ExtendSite\Constants\Config;
+use ExtendSite\ElementorAddon\Base\ControlOptions;
 use ExtendSite\ElementorAddon\Traits\HasImageSizeControl;
 use ExtendSite\ElementorAddon\Traits\HasSliderControls;
 
@@ -27,7 +29,7 @@ class CarouselImages extends Widget_Base {
 
 	// widget icon
 	public function get_icon(): string {
-		return 'eicon-slider-full-screen';
+		return 'eicon-slider-push';
 	}
 
 	// widget categories
@@ -65,6 +67,16 @@ class CarouselImages extends Widget_Base {
 
         // Add controls image size
 		$this->addImageSizeControl($this);
+
+        $this->add_control(
+            'html_tag',
+            [
+                'label'   => esc_html__( 'HTML Tag', 'extend-site' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'h3',
+                'options' => ControlOptions::heading_tags(),
+            ]
+        );
 
         // add control repeater
 		$repeater = new Repeater();
@@ -135,14 +147,78 @@ class CarouselImages extends Widget_Base {
 
         // Breakpoints options
 		$this->addBreakpointsControlsGrouped($this);
+
+        // Style Heading
+        $this->start_controls_section(
+            'style_heading',
+            [
+                'label' => esc_html__( 'Tiêu đề', 'extend-site' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'heading_align',
+            [
+                'label'     => esc_html__( 'Căn chỉnh', 'extend-site' ),
+                'type'      => Controls_Manager::CHOOSE,
+                'options'   => [
+                    'left' => [
+                        'title' => esc_html__( 'Trái', 'extend-site' ),
+                        'icon'  => 'eicon-text-align-left',
+                    ],
+
+                    'center' => [
+                        'title' => esc_html__( 'Giữa', 'extend-site' ),
+                        'icon'  => 'eicon-text-align-center',
+                    ],
+
+                    'right' => [
+                        'title' => esc_html__( 'Phải', 'extend-site' ),
+                        'icon'  => 'eicon-text-align-right',
+                    ],
+
+                    'justify' => [
+                        'title' => esc_html__( 'Căn đều hai lề', 'extend-site' ),
+                        'icon'  => 'eicon-text-align-justify',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .heading' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'heading_color',
+            [
+                'label'     => esc_html__( 'Màu', 'extend-site' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .heading' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'heading_typography',
+                'label'    => esc_html__( 'Kiểu chữ', 'extend-site' ),
+                'selector' => '{{WRAPPER}} .heading',
+            ]
+        );
+
+        $this->end_controls_section();
 	}
 
 	// widget output on the frontend
 	protected function render(): void {
 		$settings = $this->get_settings_for_display();
+        $tag = $settings['html_tag'];
 
 		// Add classes for the slider wrapper
-		$classes = ['es-addon-carousel-images swiper es-custom-swiper-slider'];
+		$classes = ['es-addon-carousel-images es-slider-wrap es-slider-wrap--carousel'];
 
 		if ( $settings['equal_height'] === 'yes' ) {
 			$classes[] = 'es-equal-height';
@@ -154,47 +230,63 @@ class CarouselImages extends Widget_Base {
 		$swiperOptions = $this->generateSlideConfig( $settings );
 		?>
 
-        <div <?php echo $this->get_render_attribute_string( 'classes' ); ?> data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
-            <div class="swiper-wrapper">
-				<?php
-				foreach ( $settings['list'] as $index => $item ) :
-					$image_id = $item['list_image']['id'];
-					$url = $item['list_link']['url'];
-					?>
-
-                    <div class="item swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-						<?php
-                        if ( $image_id ) :
-	                        echo wp_get_attachment_image( $image_id, $settings['image_size'] );
-                        else:
-                        ?>
-                            <img src="<?php echo esc_url( Config::$url . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
-                        <?php
-                        endif;
-
-						if ( $url ) :
-							$link_key = 'link_' . $index;
-							$this->add_link_attributes( $link_key, $item['list_link'] );
+        <div <?php echo $this->get_render_attribute_string( 'classes' ); ?>>
+            <div class="swiper es-custom-swiper-slider" data-settings-swiper='<?php echo esc_attr( $swiperOptions ); ?>'>
+                <div class="swiper-wrapper">
+                    <?php
+                    foreach ( $settings['list'] as $index => $item ) :
+                        $image_id = $item['list_image']['id'];
+                        $url = $item['list_link']['url'];
                         ?>
 
-                            <a class="item__link" <?php echo $this->get_render_attribute_string( $link_key ); ?>></a>
+                        <div class="swiper-slide elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
+                            <div class="item es-flex es-flex-column es-col-gap-3 es-row-gap-3">
+                                <div class="item__thumbnail">
+                                    <?php
+                                    if ( $image_id ) :
+                                        echo wp_get_attachment_image( $image_id, $settings['image_size'] );
+                                    else:
+                                    ?>
+                                        <img src="<?php echo esc_url( Config::$url . 'assets/images/no-image.png' ); ?>" alt="<?php the_title(); ?>"/>
+                                    <?php
+                                    endif;
 
-						<?php endif; ?>
-                    </div>
+                                    if ( $url ) :
+                                        $link_key = 'link_' . $index;
+                                        $this->add_link_attributes( $link_key, $item['list_link'] );
+                                    ?>
 
-				<?php endforeach; ?>
+                                        <a class="item__link" <?php echo $this->get_render_attribute_string( $link_key ); ?>></a>
+
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php
+                                if ( ! empty( $item['list_title'] ) ) :
+                                    printf(
+                                        '<%1$s class="heading">%2$s</%1$s>',
+                                        esc_attr( $tag ),
+                                        esc_html( $item['list_title'] )
+                                    );
+                                endif;
+                                ?>
+                            </div>
+                        </div>
+
+                    <?php endforeach; ?>
+                </div>
             </div>
 
-	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
+            <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'dots' ) : ?>
                 <div class="swiper-pagination"></div>
-	        <?php endif; ?>
+            <?php endif; ?>
 
 	        <?php if ( $settings['navigation'] == 'both' || $settings['navigation'] == 'arrows' ) : ?>
-                <div class="swiper-button-prev">
+                <div class="swiper-button-arrow swiper-button-prev">
                     <i class="es-icon-mask es-icon-mask-angle-left"></i>
                 </div>
 
-                <div class="swiper-button-next">
+                <div class="swiper-button-arrow swiper-button-next">
                     <i class="es-icon-mask es-icon-mask-angle-right"></i>
                 </div>
 	        <?php endif; ?>

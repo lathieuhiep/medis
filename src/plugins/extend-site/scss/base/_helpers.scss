@@ -16,21 +16,49 @@
   flex-grow: 1;
 }
 
-.#{$prefix-plugin-class}custom-swiper-slider {
-  &.is-initializing {
-    visibility: hidden;
-    height: auto;
-  }
+.es-slider-wrap {
+  position: relative;
 
-  .swiper-pagination {
-    position: static;
-  }
+  .swiper-button-arrow {
+    z-index: 2;
 
-  .swiper-button-prev,
-  .swiper-button-next {
     &:after {
       display: none;
     }
+  }
+
+  .es-icon-mask {
+    --#{$prefix-plugin-class}icon-size: 2.4rem;
+    --#{$prefix-plugin-class}icon-color: #007B14;
+  }
+
+  &--carousel {
+    &:has(.swiper-button-arrow) {
+      padding: 0 2.4rem;
+    }
+
+    .swiper {
+      padding: .8rem;
+    }
+
+    .swiper-pagination {
+      position: static;
+    }
+
+    .swiper-button-prev {
+      left: 0;
+    }
+
+    .swiper-button-next {
+      right: 0;
+    }
+  }
+}
+
+.es-custom-swiper-slider {
+  &.is-initializing {
+    visibility: hidden;
+    height: auto;
   }
 }
 

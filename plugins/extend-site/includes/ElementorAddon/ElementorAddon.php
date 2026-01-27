@@ -4,10 +4,12 @@ namespace ExtendSite\ElementorAddon;
 use ExtendSite\ElementorAddon\Widgets\CarouselImages;
 use ExtendSite\ElementorAddon\Widgets\ContactForm;
 use ExtendSite\ElementorAddon\Widgets\HeadingEditor;
+use ExtendSite\ElementorAddon\Widgets\HeroSlider;
 use ExtendSite\ElementorAddon\Widgets\InfoBox;
 use ExtendSite\ElementorAddon\Widgets\IconTextGrid;
 use ExtendSite\ElementorAddon\Widgets\PostCarousel;
 use ExtendSite\ElementorAddon\Widgets\PostGrid;
+use ExtendSite\ElementorAddon\Widgets\TeamCarousel;
 use ExtendSite\ElementorAddon\Widgets\TermGrid;
 use ExtendSite\ElementorAddon\Widgets\TestimonialSlider;
 
@@ -79,10 +81,12 @@ class ElementorAddon
         $widgets_manager->register(new TermGrid());
 
 //        $widgets_manager->register(new HeadingEditor());
-//        $widgets_manager->register(new InfoBox());
+        $widgets_manager->register(new HeroSlider());
+        $widgets_manager->register(new InfoBox());
 //        $widgets_manager->register(new IconTextGrid());
 //        $widgets_manager->register(new PostCarousel());
-//        $widgets_manager->register(new PostGrid());
-//        $widgets_manager->register(new TestimonialSlider());
+        $widgets_manager->register(new PostGrid());
+        $widgets_manager->register(new TeamCarousel());
+        $widgets_manager->register(new TestimonialSlider());
     }
 }

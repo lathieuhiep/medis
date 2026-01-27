@@ -26,12 +26,13 @@
 
         // Merge options
         let config = $.extend({}, defaults, options);
+        const $wrapper = $slider.closest('.es-slider-wrap');
 
         // check pagination
         if (config.pagination) {
-            if ($slider.find('.swiper-pagination').length) {
+            if ($wrapper.find('.swiper-pagination').length) {
                 config.pagination = {
-                    el: $slider.find('.swiper-pagination')[0],
+                    el: $wrapper.find('.swiper-pagination')[0],
                     clickable: true
                 };
             } else {
@@ -41,10 +42,14 @@
 
         // check navigation
         if (config.navigation) {
-            if ($slider.find('.swiper-button-next').length && $slider.find('.swiper-button-prev').length) {
+            if (
+                $wrapper.length &&
+                $wrapper.find('.swiper-button-next').length &&
+                $wrapper.find('.swiper-button-prev').length
+            ) {
                 config.navigation = {
-                    nextEl: $slider.find('.swiper-button-next')[0],
-                    prevEl: $slider.find('.swiper-button-prev')[0]
+                    nextEl: $wrapper.find('.swiper-button-next')[0],
+                    prevEl: $wrapper.find('.swiper-button-prev')[0],
                 };
             } else {
                 config.navigation = false;
@@ -105,8 +110,8 @@
     }
 
     $(window).on('elementor/frontend/init', function () {
-        /* Element slider */
-        elementorFrontend.hooks.addAction('frontend/element_ready/es-slides.default', InitSwiperSliders);
+        // hero slider
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-hero-slider.default', InitSwiperSliders);
 
         // post carousel slider
         elementorFrontend.hooks.addAction('frontend/element_ready/es-post-carousel.default', InitSwiperSliders);
@@ -116,6 +121,9 @@
 
         // image carousel slider
         elementorFrontend.hooks.addAction('frontend/element_ready/es-carousel-images.default', InitSwiperSliders);
+
+        // team carousel
+        elementorFrontend.hooks.addAction('frontend/element_ready/es-team-carousel.default', InitSwiperSliders);
     });
 
 })(jQuery);

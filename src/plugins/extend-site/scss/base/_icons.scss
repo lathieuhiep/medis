@@ -16,13 +16,12 @@
 }
 
 .#{$prefix-plugin-class}icon-mask {
-  --#{$prefix-plugin-class}icon-width: 1.6rem;
-  --#{$prefix-plugin-class}icon-height: 1.6rem;
+  --#{$prefix-plugin-class}icon-size: 1.6rem;
   --#{$prefix-plugin-class}icon-color: currentColor;
 
   display: inline-block;
-  width: var(--#{$prefix-plugin-class}icon-width);
-  height: var(--#{$prefix-plugin-class}icon-height);
+  width: var(--#{$prefix-plugin-class}icon-size);
+  height: var(--#{$prefix-plugin-class}icon-size);
   background-color: var(--#{$prefix-plugin-class}icon-color);
   mask-size: contain;
   -webkit-mask-size: contain;
