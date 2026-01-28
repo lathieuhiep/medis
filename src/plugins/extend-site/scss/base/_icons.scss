@@ -1,5 +1,15 @@
 @import "../abstracts/abstracts";
 
+// list icon
+$icon-list: (
+    angle-left
+    angle-right
+    envelope
+    facebook-f
+    location-dot
+    phone
+);
+
 .#{$prefix-plugin-class}icon {
   --#{$prefix-plugin-class}icon-size: 5rem;
 
@@ -30,13 +40,9 @@
   mask-position: center;
   -webkit-mask-position: center;
 
-  &-angle {
-    &-left {
-      @include mask-image("#{$icon-path}/angle-left.svg");
-    }
-
-    &-right {
-      @include mask-image("#{$icon-path}/angle-right.svg");
+  @each $name in $icon-list {
+    &-#{$name} {
+      @include mask-image("#{$icon-path}/#{$name}.svg");
     }
   }
 }

@@ -25,7 +25,7 @@ require_once get_theme_file_path('includes/helpers/opt-contact.php');
 require_once get_theme_file_path('includes/helpers/opt-footer.php');
 
 // Required: Widgets
-require get_parent_theme_file_path( '/includes/widgets/contact-info-widget.php' );
-require get_parent_theme_file_path( '/includes/widgets/recent-post.php' );
-require get_parent_theme_file_path( '/includes/widgets/social-widget.php' );
+//require get_parent_theme_file_path( '/includes/widgets/contact-info-widget.php' );
+//require get_parent_theme_file_path( '/includes/widgets/recent-post.php' );
+//require get_parent_theme_file_path( '/includes/widgets/social-widget.php' );
 

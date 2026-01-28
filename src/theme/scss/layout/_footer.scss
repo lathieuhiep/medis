@@ -1,6 +1,11 @@
 @import "../abstracts/abstracts";
 
 .footer {
+  background-image: url("#{$image-path-theme}/footer-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   &__column {
     border-top: .1rem solid color(primary);
     padding: 3rem 0;

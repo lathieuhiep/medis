@@ -106,4 +106,21 @@ class ESHelpers
 
         return $options;
     }
+
+    /**
+     * Lọc chuỗi chỉ giữ lại các ký tự số.
+     *
+     * @param string $string Chuỗi đầu vào.
+     * @return string Chuỗi chỉ chứa số, hoặc null nếu đầu vào rỗng.
+     */
+    public static function preg_replace_ony_number(string $string): string
+    {
+        $number = '';
+
+        if (!empty($string)) {
+            $number = preg_replace('/[^0-9]/', '', strip_tags($string));
+        }
+
+        return $number;
+    }
 }

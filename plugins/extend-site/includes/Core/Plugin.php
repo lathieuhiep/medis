@@ -9,6 +9,7 @@ use ExtendSite\Constants\Config;
 use ExtendSite\Core\Breadcrumb\BreadcrumbService;
 use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\PostTypeManager;
+use ExtendSite\Widgets\WidgetRegistrar;
 
 defined('ABSPATH') || exit;
 
@@ -27,6 +28,9 @@ class Plugin
 
         // Load Carbon Fields theme options
         ThemeOptions::boot();
+
+        // Load widget registration
+        WidgetRegistrar::boot();
 
         // Load asset enqueuing
         Enqueue::boot();
